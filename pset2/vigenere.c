@@ -5,72 +5,123 @@
 
 int main(int argc, string argv[])
 {
-    
+    //for accepting only one string 
+   
     if (argc == 2)
     
     {
+    
     string s = argv[1];
-    
-    
-    
-    
-         
-         for(int i =0; i<strlen(s); i++)
-    
-            int a = (int)s[i];
-    
-    printf("plaintext:");
    
-    string s = get_string();
-
-
-        printf("ciphertext:");
-        
-        for(int i =0; i<strlen(s); i++)
-
-        {
-            if ((s[i]>='a' && s[i]<='z'))
-            {        
-        
-            int j = (int)s[i]-97;
-            
-            int l = (j + k) % 26;
-            
-            
-            printf("%c",(char)(l+97));
-            
-            
-            }
-            
-            else if((s[i]>='A' && s[i]<='Z'))
-            {
-                
-            int j = (int)s[i]-65;
-            
-            int l = (j + k) % 26;
-            
-            
-            printf("%c",(char)(l+65));
-            
-            
-            
-            }
-            else
-            {
-            printf("%c",s[i]);    
-                
-            }
-            
-            
-        }
-
-            printf("\n");
-    }    
+    //determines if the string entered is only alpha
     
-     else
-    { printf("Usage:\n");
+    int i = 0;
+    
+        for(int j =0; j<strlen(s); j++){
         
+            if(isalpha(s[j])){
+            
+                i = i+0;
+            
+            }
+            
+            else{
+            
+                i++;
+            
+            }
         
-        return 1;}
-
+        }
+     
+    //continues only if key string is all alphas       
+        if (i==0){
+        
+          //Prints and accepts string to be encrypted
+        
+          printf("plaintext: ");
+       
+          string t = get_string();
+        
+          printf("ciphertext: ");        
+        
+          int l =0;
+          
+            for(int k=0; k<strlen(t); k++){
+        
+                //prints lower after encrpyting it
+                
+                if(l>=strlen(s)){
+                        
+                        l=0;
+                        }
+                
+                
+                if (t[k]>='a' && t[k]<='z'){
+                    
+                    int m = (int)(t[k]-97);
+                    
+                        if(l>strlen(s)){
+                        
+                        //printf("fuck you");
+                            
+                        l=0;
+                        }
+                    int n = (int)(tolower(s[l]) -97);
+                    
+                    int o = (m + n) % 26;
+                    
+                    printf("%c",(char)(o + 97));
+                    
+                    l++;
+                }   
+                //prints upper after encrypting it
+                
+                else if (t[k]>='A' && t[k]<='Z'){
+                    
+                    int m = (int)(t[k]-65);
+                    
+                    int n = (int)(tolower(s[l]) -97);
+                    
+                    int o = (m + n) % 26;
+                    
+                    printf("%c",(char)(o + 65));
+                    
+                    l++;
+                }        
+                
+                //prints a non alpha character without encrypting
+                
+                else{
+                    
+                    printf("%c",t[k]);
+                    
+                }
+        
+            }        
+        }
+        
+        else{
+      
+        printf("usage");
+      
+        return 1;
+      
+        }        
+        
+        printf("\n");
+        
+      
+    }
+       
+        
+    else{
+        
+    printf("usage");    
+   
+    return 1;
+        
+    }    
+        
+    
+    
 }
